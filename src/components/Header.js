@@ -2,10 +2,17 @@ import YoutubeLogo from '../assets/logo-youtube.png';
 import ProfileImage from '../assets/profile-img.jpg';
 import SearchIcon from '../assets/search-icon.png';
 import MenuIcon from '../assets/menu-icon.png';
+import { useDispatch } from 'react-redux';
+import { toggleMenu } from '../utils/appSlice';
+
 const Header = () => {
+    const dispatch = useDispatch();
+    const toggleMenuHandler = () => {
+        dispatch(toggleMenu());
+    }
     return <div className='grid grid-cols-12 shadow-md'>
         <div className='flex col-span-2 mx-4'>
-            <button>
+            <button onClick={toggleMenuHandler}>
                 <img className='h-6' src={MenuIcon} alt='menu'/>
             </button>
             <img className='h-16' src={YoutubeLogo} alt='youtube-logo'/>

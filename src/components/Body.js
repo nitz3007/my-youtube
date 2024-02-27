@@ -1,7 +1,7 @@
 import SideBar from "./SideBar";
 import MainContainer from "./MainContainer";
 const Body = () => {
-    return <div>
+    return <div className="flex">
         <SideBar/>
         <MainContainer/>
     </div>
