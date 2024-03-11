@@ -14,20 +14,20 @@ const SideBar = () => {
 
     return <div className="w-52">
        <ul className='p-4'>
-            <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md'>
+            <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>
                 <img src={HomeIcon} alt='home-icon' className='w-6 mr-5'/>
                 Home
             </li>
-            <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md'>
+            <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>
                 <img src={ShortsIcon} alt='shorts-icon' className='w-6 mr-5'/>
                 Shorts
             </li>
-            <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md'>
+            <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>
                 <img src={SubscriptionIcon} alt='shorts-icon' className='w-6 mr-5'/>
                 Subscriptions
             </li>
-            <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md'>
-                <img src={MusicIcon} alt='shorts-icon' className='w-6 mr-5'/>
+            <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>
+                <img src={MusicIcon} alt='shorts-icon' className='w-6 h-6 mr-5'/>
                 Youtube Music
             </li>
        </ul>
