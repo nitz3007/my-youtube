@@ -10,7 +10,7 @@ const Header = () => {
     const toggleMenuHandler = () => {
         dispatch(toggleMenu());
     }
-    return <div className='grid grid-cols-12 shadow-md'>
+    return <nav className='grid grid-cols-12 shadow-md'>
         <div className='flex col-span-2 mx-4'>
             <button onClick={toggleMenuHandler}>
                 <img className='h-6' src={MenuIcon} alt='menu'/>
@@ -27,7 +27,7 @@ const Header = () => {
         <div className='col-span-1 flex items-center'>
             <img className='h-10' src={ProfileImage} alt='profile'/>
         </div>
-    </div>
+    </nav>
 }
 
 export default Header;

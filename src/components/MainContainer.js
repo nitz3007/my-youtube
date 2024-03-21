@@ -6,7 +6,7 @@ import VideoContainer from './VideoContainer';
 const MainContainer = () => {
     // const isMenuOpen = useSelector(store => store.app.isMenuOpen);
     return (
-        <div>
+        <div className=''>
             <ButtonList/>
             <VideoContainer/>
         </div>
