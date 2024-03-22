@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MenuIcon from '../assets/menu-icon.png';
 import { toggleMenu } from '../utils/appSlice';
 import YoutubeLogo from '../assets/logo-youtube.png';
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     const isMenuOpen = useSelector(store => store.app.isMenuOpen);
@@ -32,10 +33,12 @@ const SideBar = () => {
                 <img className='h-16' src={YoutubeLogo} alt='youtube-logo'/>
             </span>
             <ul className='p-4'>
-                    <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>
-                        <img src={HomeIcon} alt='home-icon' className='w-6 mr-5'/>
-                        Home
-                    </li>
+                    <Link to="/">
+                        <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>
+                            <img src={HomeIcon} alt='home-icon' className='w-6 mr-5'/>
+                            Home
+                        </li>
+                    </Link>
                     <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>
                         <img src={ShortsIcon} alt='shorts-icon' className='w-6 mr-5'/>
                         Shorts

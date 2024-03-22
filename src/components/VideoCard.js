@@ -2,7 +2,6 @@ import React from 'react';
 import { time_ago } from '../utils/util';
 
 const VideoCard = ({info}) => {
-    console.log(info);
     const {snippet, statistics} = info;
     const {title, channelTitle, thumbnails, publishedAt} = snippet;
     
