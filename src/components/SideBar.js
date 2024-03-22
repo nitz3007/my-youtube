@@ -26,7 +26,7 @@ const SideBar = () => {
         </div>
         <aside className="w-52 transform top-0 left-0 w-64 fixed bg-white h-full z-30">
             <span className='flex col-span-2 mx-4'>
-                <button onClick={toggleMenuHandler}>
+                <button onClick={toggleMenuHandler} className='p-2'>
                     <img className='h-6' src={MenuIcon} alt='menu'/>
                 </button>
                 <img className='h-16' src={YoutubeLogo} alt='youtube-logo'/>

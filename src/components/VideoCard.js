@@ -9,8 +9,8 @@ const VideoCard = ({info}) => {
     
 
     return (
-        <div className='w-80 mx-2 my-4'>
-            <img className='rounded-lg mb-2' src={thumbnails.medium.url} alt='thumbnail'/>
+        <div className='w-96 mx-2 my-4'>
+            <img className='rounded-xl mb-2 w-full object-cover bg-transparent' src={thumbnails.medium.url} alt='thumbnail'/>
             <h1 className='font-semibold text-[#0F0F0F]'>{title}</h1>
             <h2 className='text-sm text-[#606060]'>{channelTitle}</h2>
             <span className='flex text-sm text-[#606060]'>

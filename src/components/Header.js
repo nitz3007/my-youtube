@@ -10,9 +10,9 @@ const Header = () => {
     const toggleMenuHandler = () => {
         dispatch(toggleMenu());
     }
-    return <nav className='grid grid-cols-12 shadow-md'>
+    return <nav className='grid grid-cols-12'>
         <div className='flex col-span-2 mx-4'>
-            <button onClick={toggleMenuHandler}>
+            <button onClick={toggleMenuHandler} className='p-2'>
                 <img className='h-6' src={MenuIcon} alt='menu'/>
             </button>
             <img className='h-16' src={YoutubeLogo} alt='youtube-logo'/>

@@ -1,15 +1,9 @@
 import Button from "./Button";
 
 const ButtonList = () => {
+    const quickList = ['All', 'Sports', 'News', 'Podcasts', 'Plants', 'Interior Designs', 'Travel', 'Baking', 'Music', 'Paintins', 'Flute Lessons', 'Gardens', 'Meditation'];
     return <div>
-        <Button name='All'/>
-        <Button name='Sports'/>
-        <Button name='News'/>
-        <Button name='Podcasts'/>
-        <Button name='Plants'/>
-        <Button name='Travel'/>
-        <Button name='Baking'/>
-        <Button name='Interior Designs'/>
+        {quickList.map(item => <Button name={item}/>)}
     </div>
 }
 
