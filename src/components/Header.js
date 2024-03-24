@@ -2,20 +2,29 @@ import YoutubeLogo from '../assets/logo-youtube.png';
 import ProfileImage from '../assets/profile-img.jpg';
 import SearchIcon from '../assets/search-icon.png';
 import MenuIcon from '../assets/menu-icon.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
 import { useState, useEffect } from 'react';
 import { SEARCH_SUGGESTION_API } from '../utils/constants';
+import { cacheResults } from '../utils/searchSlice';
 
 const Header = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchSuggestions, setSearchSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
+
+    const searchCache = useSelector(store => store.search);
+
+    const dispatch = useDispatch();
     
     useEffect(()=>{
         //Debouncing
         const timer = setTimeout(()=> {
-            getSearchSuggestions();
+            if(searchCache[searchQuery]) {
+                setSearchSuggestions(searchCache[searchQuery]);
+            } else {
+                getSearchSuggestions();
+            }   
         }, 200);
         
         return ()=>{
@@ -27,9 +36,14 @@ const Header = () => {
         const data = await fetch(SEARCH_SUGGESTION_API + searchQuery);
         const json = await data.json();
         setSearchSuggestions(json[1]);
+
+        //update cache
+        dispatch(cacheResults({
+            [searchQuery]: json[1]
+        }))
     }
 
-    const dispatch = useDispatch();
+    
     const toggleMenuHandler = () => {
         dispatch(toggleMenu());
     }
