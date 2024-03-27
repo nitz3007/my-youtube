@@ -5,8 +5,9 @@ import MenuIcon from '../assets/menu-icon.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
 import { useState, useEffect } from 'react';
-import { SEARCH_SUGGESTION_API } from '../utils/constants';
+import { SEARCH_SUGGESTION_API, SEARCH_LIST_API } from '../utils/constants';
 import { cacheResults } from '../utils/searchSlice';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -42,11 +43,21 @@ const Header = () => {
             [searchQuery]: json[1]
         }))
     }
-
     
     const toggleMenuHandler = () => {
         dispatch(toggleMenu());
     }
+
+    const getSearchResults = async() => {
+        const data = await fetch(SEARCH_LIST_API + searchQuery);
+        const json = await data.json();
+        console.log(json.items);
+    }
+
+    const handleApplySearch = () => {
+        getSearchResults();
+    }
+
     return <nav className='grid grid-cols-12'>
         <div className='flex col-span-2 mx-4'>
             <button onClick={toggleMenuHandler} className='p-2'>
@@ -63,9 +74,12 @@ const Header = () => {
                     onFocus={()=>{setShowSuggestions(true)}}
                     onBlur={()=>{setShowSuggestions(false)}}
                 />
-                <button className='px-3 py-1 border border-slate-400 rounded-r-full'>
+                <Link 
+                    className='px-3 py-1 border border-slate-400 rounded-r-full'
+                    to={"/search?search_query="+searchQuery}
+                >
                     <img className='h-6' src={SearchIcon} alt='search'/>
-                </button>
+                </Link>
                 
                 {showSuggestions && searchSuggestions.length> 0 && 
                 <ul className='absolute w-96 py-4 left-0 top-[3.25rem] bg-white border rounded-xl shadow-lg'>
