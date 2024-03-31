@@ -8,7 +8,7 @@ const VideoCard = ({info}) => {
     
 
     return (
-        <div className='w-96 mx-2 my-4'>
+        <div className='w-96 mx-2 my-4 hover:transition-transform hover:scale-95 delay-100 duration-200'>
             <img className='rounded-xl mb-2 w-full object-cover bg-transparent' src={thumbnails.medium.url} alt='thumbnail'/>
             <h1 className='font-semibold text-[#0F0F0F]'>{title}</h1>
             <h2 className='text-sm text-[#606060]'>{channelTitle}</h2>

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { YOUTUBE_VIDEO_LIST_API } from '../utils/constants';
+import { YOUTUBE_VIDEO_LIST_API, YOUTUBE_CATEGORYWISE_VIDEO_LIST_API } from '../utils/constants';
 import VideoCard from './VideoCard';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const VideoContainer = () => {
 
+    const selectedCategory = useSelector(store => store.app.selectedVideoCategory);
     const [videos, setVideos] = useState([]);
-
+    
     useEffect(()=>{
         getVideos();
-    },[]);
+    },[selectedCategory]);
 
     const getVideos = async () => {
-        const data = await fetch(YOUTUBE_VIDEO_LIST_API);
+        const data = await fetch(selectedCategory.id === 'all' ? YOUTUBE_VIDEO_LIST_API : YOUTUBE_CATEGORYWISE_VIDEO_LIST_API+selectedCategory.id);
         const json = await data.json();
         setVideos(json.items);
     }

@@ -83,7 +83,7 @@ const Header = () => {
                 </Link>
                 
                 {showSuggestions && searchSuggestions.length> 0 && 
-                <ul className='absolute w-96 py-4 left-0 top-[3.25rem] bg-white border rounded-xl shadow-lg'>
+                <ul className='absolute w-96 py-4 left-0 top-[3.25rem] bg-white border rounded-xl shadow-lg z-10'>
                     {searchSuggestions?.map(suggestion => 
                         <li className='flex py-1 px-6 font-semibold hover:bg-[#dddddd] w-full' onMouseDown={(e)=>{selectSearchSuggestion(e)}}>
                                 {suggestion}
