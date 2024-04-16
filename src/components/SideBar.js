@@ -2,6 +2,7 @@ import HomeIcon from '../assets/home-icon.png';
 import ShortsIcon from '../assets/shorts-icon.png';
 import SubscriptionIcon from '../assets/subscription-icon.png';
 import MusicIcon from '../assets/music-icon.webp';
+import LiveIcon from '../assets/live-icon.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import MenuIcon from '../assets/menu-icon.png';
 import { toggleMenu } from '../utils/appSlice';
@@ -37,6 +38,16 @@ const SideBar = () => {
                         <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>
                             <img src={HomeIcon} alt='home-icon' className='w-6 mr-5'/>
                             Home
+                        </li>
+                    </Link>
+                    <Link to="/live">
+                        <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold relative'>
+                            <img src={LiveIcon} alt='home-icon' className='w-6 mr-5'/>
+                            Live
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            </span>
                         </li>
                     </Link>
                     <li className='flex focus:bg-[#ebeef0] hover:bg-[#dddddd] p-2 rounded-md text-sm font-semibold'>

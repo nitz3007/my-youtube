@@ -1,9 +1,26 @@
 import { useSearchParams } from "react-router-dom";
 import CommentContainer from "./CommentContainer";
+import {YOUTUBE_VIDEO_DETAILS} from '../utils/constants';
+import { useEffect, useState } from "react";
+
 
 const WatchVideoPage = () => {
     const [searchParams] = useSearchParams();
-    console.log(searchParams.get("v"));
+    const [videoDetails, setVideoDetails] = useState({});
+
+    const getVideoDetails = async() => {
+        const data = await fetch(YOUTUBE_VIDEO_DETAILS + searchParams.get("v"));
+        const json= await data.json();
+        console.log(json.items[0]);
+        setVideoDetails(json.items[0]);
+    }
+
+    useEffect(()=>{
+        getVideoDetails();
+
+    },[searchParams.get("v")])
+
+
     return (
         <div className="mx-10 my-5">
             <iframe 
@@ -16,6 +33,15 @@ const WatchVideoPage = () => {
                 referrerpolicy="strict-origin-when-cross-origin" 
                 allowFullscreen>                    
             </iframe>
+            {videoDetails.snippet && <div className="my-4 text-[#0f0f0f]">
+                <h1 className="text-xl font-bold">{videoDetails?.snippet?.title}</h1>
+                <div>
+                    <span>
+                        <h2 className="font-semibold">{videoDetails?.snippet?.channelTitle}</h2>
+                        <h3>{`${(Number(videoDetails?.statistics?.viewCount)/1000).toFixed(1)}K`}</h3>
+                    </span>
+                </div>
+            </div>}
             <CommentContainer/>
         </div>
     );
