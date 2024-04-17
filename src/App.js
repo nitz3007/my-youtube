@@ -7,6 +7,7 @@ import MainContainer from "./components/MainContainer";
 import WatchVideoPage from "./components/WatchVideoPage";
 import SearchPage from "./components/SearchPage";
 import LivePage from "./components/LivePage";
+import WatchLivePage from "./components/WatchLivePage";
 
 const appRouter = createBrowserRouter([{
   path: "/",
@@ -26,7 +27,11 @@ const appRouter = createBrowserRouter([{
     },
     {
       path: "live",
-      element: <LivePage/>
+      element: <LivePage/>,
+    },
+    {
+      path: "watchLive",
+      element: <WatchLivePage/>,
     }
   ]
 }])
