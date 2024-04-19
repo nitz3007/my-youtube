@@ -20,7 +20,6 @@ const ButtonList = () => {
     const getYTVideoCategoryList = async() => {
         const data = await fetch(VIDEO_CATEGORY_LIST);
         const json = await data.json();
-        console.log(json, 'video category');
         setCategoryList(json.items);
     }
 

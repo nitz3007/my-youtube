@@ -7,3 +7,5 @@ export const SEARCH_SUGGESTION_API = 'http://suggestqueries.google.com/complete/
 export const SEARCH_LIST_API = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&key='+ GOOGLE_API_KEY + '&q=';
 export const VIDEO_CATEGORY_LIST = 'https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key=' + GOOGLE_API_KEY;
 export const CHANNEL_DETAILS = "//www.googleapis.com/youtube/v3/channels?part=snippet,statistics&key=" + GOOGLE_API_KEY + "&id=";
+export const YOUTUBE_LIVE_VIDEO_DETAILS = 'https://youtube.googleapis.com/youtube/v3/videos?part=snippet,liveStreamingDetails&key='+GOOGLE_API_KEY + '&id=';
+export const YOUTUBE_LIVE_CHAT_LIST = "https://www.googleapis.com/youtube/v3/liveChat/messages?part=snippet&key=" + GOOGLE_API_KEY + "&liveChatId="

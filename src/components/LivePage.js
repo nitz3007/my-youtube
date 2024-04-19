@@ -19,7 +19,6 @@ const LivePage = (props) => {
     const data = await fetch(SEARCH_LIST_API + "live");
     const json = await data.json();
     setLiveVideosList(json.items);
-    console.log(json, "Live Data");
   }
 
   return (
