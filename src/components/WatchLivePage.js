@@ -1,37 +1,28 @@
 import React, { useEffect, useState } from "react"
 import {useSearchParams, useNavigate} from 'react-router-dom';
-import {YOUTUBE_LIVE_VIDEO_DETAILS, YOUTUBE_LIVE_CHAT_LIST} from "../utils/constants";
+import {YOUTUBE_LIVE_VIDEO_DETAILS } from "../utils/constants";
 import LiveChatContainer from "./LiveChatContainer";
 
 const WatchLivePage = (props) => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const [liveVideoDetails, setLiveVideoDetails] = useState();
-    const [liveChatList, setLiveChatList] = useState();
-
+    const [liveChatId, setLiveChatId] = useState();
+    
     const getLiveVideoDetails = async() => {
         const data = await fetch(YOUTUBE_LIVE_VIDEO_DETAILS + searchParams.get("v"));
         const json = await data.json();
         setLiveVideoDetails(json.items[0]);
         console.log(json, "live data");
 
-        if(json?.items[0].liveStreamingDetails?.activeLiveChatId) {
-          getLiveChatData(json?.items[0].liveStreamingDetails?.activeLiveChatId);
-        } else {
-          navigate("/watch?v="+searchParams.get("v"));
-        }
         
+        if(!json?.items[0].liveStreamingDetails?.activeLiveChatId) {
+          navigate("/watch?v="+searchParams.get("v"));
+        } else {
+          setLiveChatId(json?.items[0].liveStreamingDetails?.activeLiveChatId)
+        }
+
     }
-
-    const getLiveChatData = async(chatId) => {
-      
-      const chatData = await fetch(YOUTUBE_LIVE_CHAT_LIST + chatId);
-      const chatjson = await chatData.json();
-      setLiveChatList(chatjson.items);
-      console.log(chatjson);
-    }
-
-
 
     useEffect(()=>{
         getLiveVideoDetails();
@@ -53,7 +44,7 @@ const WatchLivePage = (props) => {
       </div>
       
       <div className="h-[420px]">
-        <LiveChatContainer/>
+        <LiveChatContainer liveChatId={liveChatId}/>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {SEARCH_LIST_API} from "../utils/constants";
+import {LIVE_SEARCH_LIST_API} from "../utils/constants";
 import { Link } from "react-router-dom";
 import SearchVideoCard from "./SearchVideoCard";
 import { useDispatch } from 'react-redux';
@@ -16,9 +16,11 @@ const LivePage = (props) => {
   },[]);
 
   const getLiveBroadcastList = async() => {
-    const data = await fetch(SEARCH_LIST_API + "live");
+    const data = await fetch(LIVE_SEARCH_LIST_API);
     const json = await data.json();
+    // const liveStreamingVideos = json.filter(video => video)
     setLiveVideosList(json.items);
+    console.log(json, "search live");
   }
 
   return (
