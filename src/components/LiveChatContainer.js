@@ -19,7 +19,7 @@ const LiveChatContainer = ({liveChatId}) => {
                 getLiveChatData(liveChatId);
             }
             
-        }, 5000);
+        }, 60000);
 
         return ()=> clearInterval(i);
     },[liveChatId]);
@@ -38,14 +38,19 @@ const LiveChatContainer = ({liveChatId}) => {
       }
 
     return (
-        <div className="w-full h-full border rounded-xl overflow-y-scroll">
-            <div className="border-b px-6 py-3">
+        <div className="w-full h-full border rounded-xl overflow-x-hidden overflow-y-auto">
+            <div className="border-b px-6 py-3 z-10 fixed bg-white w-full rounded-t-xl">
                 <h1 className="text-[#0f0f0f]">Live Chat</h1>
             </div>
-            <div className="flex flex-col justify-end">
+            <div className="flex flex-col justify-end h-95 w-full">
                 {chatMessages?.map(chat => {
                     return <ChatMessage name={chat.name} message={chat.message}/>
                 })}
+                {/* <ChatMessage name={"Niharika"} message={"Lorem ipsum ate de in de ja vu sky black honey bear1"}/>
+                <ChatMessage name="Akshay Saini" message="Lorem ipsum ate de in de ja vu sky black honey bear2"/>
+                <ChatMessage name="Sparsh Sharma" message="Lorem ipsum ate de in de ja vu sky black honey bear3"/>
+                <ChatMessage name="Ananya Sinha" message="Lorem ipsum ate de in de ja vu sky black honey bear4"/>
+                <ChatMessage name="Keerti chopra" message="Lorem ipsum ate de in de ja vu sky black honey bear5"/> */}
             </div>
         </div>
     )

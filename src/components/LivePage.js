@@ -20,7 +20,6 @@ const LivePage = (props) => {
     const json = await data.json();
     // const liveStreamingVideos = json.filter(video => video)
     setLiveVideosList(json.items);
-    console.log(json, "search live");
   }
 
   return (

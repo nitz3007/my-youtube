@@ -7,9 +7,9 @@ const ChatMessage = ({name, message}) => {
   return (
     <div className="flex text-[#0f0f0f] items-center mx-4 my-2">
         <img src={UserIcon} alt="user-profile" className="h-7 mr-2"/>
-        <span className="flex">
-            <h2 className="text-[13px] font-semibold mr-2 text-[#11111199]">{name}</h2>
-            <p className="text-[13px]">{message}</p>
+        <span className="inline">
+            <text className="text-[13px] font-semibold mr-2 text-[#11111199]">{name}</text>
+            <text className="text-[13px]">{message}</text>
         </span>
     </div>
   )

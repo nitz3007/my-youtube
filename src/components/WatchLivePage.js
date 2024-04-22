@@ -13,8 +13,6 @@ const WatchLivePage = (props) => {
         const data = await fetch(YOUTUBE_LIVE_VIDEO_DETAILS + searchParams.get("v"));
         const json = await data.json();
         setLiveVideoDetails(json.items[0]);
-        console.log(json, "live data");
-
         
         if(!json?.items[0].liveStreamingDetails?.activeLiveChatId) {
           navigate("/watch?v="+searchParams.get("v"));
