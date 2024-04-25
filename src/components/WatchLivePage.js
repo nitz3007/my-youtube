@@ -30,7 +30,7 @@ const WatchLivePage = (props) => {
     <div className="mx-10 my-5 grid grid-cols-3 gap-4">
       <div className="col-span-2">
         <iframe 
-            width="920" 
+            width="100%" 
             height="420" 
             src={"https://www.youtube.com/embed/"+searchParams.get("v")} 
             title="YouTube video player" 
