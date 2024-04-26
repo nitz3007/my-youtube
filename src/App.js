@@ -1,13 +1,12 @@
-import Body from "./components/Body";
+import Body from "./components/Global/Body";
 import './App.css';
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom"; 
-import MainContainer from "./components/MainContainer";
-import WatchVideoPage from "./components/WatchVideoPage";
-import SearchPage from "./components/SearchPage";
-import LivePage from "./components/LivePage";
-import WatchLivePage from "./components/WatchLivePage";
+import MainContainer from "./components/HomePage/MainContainer";
+import WatchVideoPage from "./components/WatchVideo/WatchVideoPage";
+import SearchPage from "./components/SearchPage/SearchPage";
+import LivePage from "./components/LivePage/LivePage";
 
 const appRouter = createBrowserRouter([{
   path: "/",
@@ -29,10 +28,6 @@ const appRouter = createBrowserRouter([{
       path: "live",
       element: <LivePage/>,
     },
-    {
-      path: "watchLive",
-      element: <WatchLivePage/>,
-    }
   ]
 }])
 

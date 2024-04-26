@@ -1,9 +1,9 @@
 import Button from "./Button";
-import {VIDEO_CATEGORY_LIST} from "../utils/constants";
+import {VIDEO_CATEGORY_LIST} from "../../utils/constants";
 import { useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
-import LeftIcon from "../assets/left-icon.svg";
-import RightIcon from "../assets/right-icon.svg";
+import LeftIcon from "../../assets/left-icon.svg";
+import RightIcon from "../../assets/right-icon.svg";
 
 const ButtonList = () => {
     const selectedCategory = useSelector(store => store.app.selectedVideoCategory);

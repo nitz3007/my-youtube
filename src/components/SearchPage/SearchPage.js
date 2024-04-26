@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, Link } from "react-router-dom";
-import { SEARCH_LIST_API } from '../utils/constants';
+import { SEARCH_LIST_API } from '../../utils/constants';
 import SearchVideoCard from './SearchVideoCard';
 
 const SearchPage = () => {

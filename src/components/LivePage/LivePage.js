@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
-import {LIVE_SEARCH_LIST_API} from "../utils/constants";
+import {LIVE_SEARCH_LIST_API} from "../../utils/constants";
 import { Link } from "react-router-dom";
-import SearchVideoCard from "./SearchVideoCard";
+import SearchVideoCard from "../SearchPage/SearchVideoCard";
 import { useDispatch } from 'react-redux';
-import { closeMenu } from '../utils/appSlice';
+import { closeMenu } from '../../utils/appSlice';
 
 const LivePage = (props) => {
   const [liveVideosList, setLiveVideosList] = useState([]);
@@ -25,7 +25,7 @@ const LivePage = (props) => {
   return (
     <div className='mx-24 my-10'>
       {liveVideosList.map(video => (
-          <Link to={"/watchLive?v="+video.id.videoId}>
+          <Link to={"/watch?v="+video.id.videoId}>
               <SearchVideoCard key={video.id.videoId} details={video.snippet}/>
           </Link>
       ))}

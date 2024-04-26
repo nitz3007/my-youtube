@@ -3,7 +3,7 @@ import ButtonList from './ButtonList';
 // import { useSelector } from 'react-redux';
 import VideoContainer from './VideoContainer';
 import { useDispatch } from 'react-redux';
-import { closeMenu } from '../utils/appSlice';
+import { closeMenu } from '../../utils/appSlice';
 
 const MainContainer = () => {
     const dispatch = useDispatch();

@@ -1,6 +1,5 @@
 import React from "react"
-import UserIcon from "../assets/profile-img.jpg";
-import CommentList from "./CommentList";
+import UserIcon from "../../assets/profile-img.jpg";
 
 const Comment = ({data}) => {
     const {name, text} = data;

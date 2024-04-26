@@ -1,5 +1,5 @@
 import React from 'react';
-import { time_ago } from '../utils/util';
+import { time_ago } from '../../utils/util';
 
 const VideoCard = ({info}) => {
     const {snippet, statistics} = info;

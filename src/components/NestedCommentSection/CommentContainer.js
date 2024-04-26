@@ -1,4 +1,3 @@
-import Comment from "./Comment"
 import CommentList from "./CommentList";
 
 const commentData = [

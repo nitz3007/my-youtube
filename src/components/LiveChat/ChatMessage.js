@@ -1,5 +1,5 @@
 import React from "react"
-import UserIcon from "../assets/profile-img.jpg";
+import UserIcon from "../../assets/profile-img.jpg";
 
 const ChatMessage = ({name, message}) => {
     // console.log(chatDetails,"chatDetails");

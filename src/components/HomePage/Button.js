@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch } from "react-redux";
-import {setSelectedVideoCategory} from "../utils/appSlice";
+import {setSelectedVideoCategory} from "../../utils/appSlice";
 
 const Button = ({id, name, activeCategory, setActiveCategoryList}) => {
 
@@ -13,7 +13,7 @@ const Button = ({id, name, activeCategory, setActiveCategoryList}) => {
     }
 
     return <button 
-        className={`px-4 py-1 bg-[#eeeeee] rounded-md text-sm hover:bg-[#dddddd] font-semibold whitespace-nowrap ${activeCategory===name && 'bg-[#000] text-[#fff]'} `}
+        className={`px-4 py-1 bg-[#eeeeee] rounded-md text-sm hover:bg-[#dddddd] font-semibold whitespace-nowrap ${activeCategory===name && 'bg-[#0f0f0f] text-[#fff]'} `}
         onClick={e=> handleButtonClick(e)}
         >
         {name}

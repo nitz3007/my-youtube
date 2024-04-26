@@ -1,6 +1,6 @@
 
-import { time_ago } from "../utils/util";
-import CHANNEL_PROFILE from '../assets/channel_profile.jpeg';
+import { time_ago } from "../../utils/util";
+import CHANNEL_PROFILE from '../../assets/channel_profile.jpeg';
 
 const SearchVideoCard = ({details}) => {
     return <div className="flex my-4 active:border active:rounded-xl active:bg-[#f7f7f7]">

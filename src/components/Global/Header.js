@@ -1,12 +1,12 @@
-import YoutubeLogo from '../assets/logo-youtube.png';
-import ProfileImage from '../assets/profile-img.jpg';
-import SearchIcon from '../assets/search-icon.png';
-import MenuIcon from '../assets/menu-icon.png';
+import YoutubeLogo from '../../assets/logo-youtube.png';
+import ProfileImage from '../../assets/profile-img.jpg';
+import SearchIcon from '../../assets/search-icon.png';
+import MenuIcon from '../../assets/menu-icon.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleMenu } from '../utils/appSlice';
+import { toggleMenu } from '../../utils/appSlice';
 import React, { useState, useEffect } from 'react';
-import { SEARCH_SUGGESTION_API, SEARCH_LIST_API } from '../utils/constants';
-import { cacheResults } from '../utils/searchSlice';
+import { SEARCH_SUGGESTION_API, SEARCH_LIST_API } from '../../utils/constants';
+import { cacheResults } from '../../utils/searchSlice';
 import { useNavigate, Link } from 'react-router-dom';
 
 

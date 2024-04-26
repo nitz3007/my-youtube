@@ -1,12 +1,12 @@
-import HomeIcon from '../assets/home-icon.png';
-import ShortsIcon from '../assets/shorts-icon.png';
-import SubscriptionIcon from '../assets/subscription-icon.png';
-import MusicIcon from '../assets/music-icon.webp';
-import LiveIcon from '../assets/live-icon.svg';
+import HomeIcon from '../../assets/home-icon.png';
+import ShortsIcon from '../../assets/shorts-icon.png';
+import SubscriptionIcon from '../../assets/subscription-icon.png';
+import MusicIcon from '../../assets/music-icon.webp';
+import LiveIcon from '../../assets/live-icon.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import MenuIcon from '../assets/menu-icon.png';
-import { toggleMenu } from '../utils/appSlice';
-import YoutubeLogo from '../assets/logo-youtube.png';
+import MenuIcon from '../../assets/menu-icon.png';
+import { toggleMenu } from '../../utils/appSlice';
+import YoutubeLogo from '../../assets/logo-youtube.png';
 import { Link } from 'react-router-dom';
 
 const SideBar = () => {
