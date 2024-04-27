@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import CommentContainer from "../NestedCommentSection/CommentContainer";
+import CommentContainer from "../CommentSection/CommentContainer";
 import {YOUTUBE_VIDEO_DETAILS} from '../../utils/constants';
 import { useEffect, useState } from "react";
 import VideoDetails from "./VideoDetails";
@@ -11,12 +11,14 @@ const WatchVideoPage = () => {
     const [searchParams] = useSearchParams();
     const [videoDetails, setVideoDetails] = useState(null);
     const [liveChatId, setLiveChatId] = useState();
+    const [commentCount, setCommentCount] = useState("");
 
     const getVideoDetails = async() => {
         const data = await fetch(YOUTUBE_VIDEO_DETAILS + searchParams.get("v"));
         const json= await data.json();
         console.log(json.items[0], "vedio Details");
         setVideoDetails(json.items[0]);
+        setCommentCount(json?.items[0].statistics.commentCount);
         if(json?.items[0].snippet?.liveBroadcastContent === "live"){
             setLiveChatId(json?.items[0].liveStreamingDetails?.activeLiveChatId);
         }
@@ -45,7 +47,7 @@ const WatchVideoPage = () => {
                     </iframe>
                     {videoDetails && <VideoFooter title={videoDetails?.snippet?.title} channelId={videoDetails?.snippet?.channelId}/>} 
                     {videoDetails && <VideoDetails videoDetails={videoDetails}/>}
-                    <CommentContainer/>   
+                    <CommentContainer commentCount={commentCount} videoId={searchParams.get("v")}/>   
                 </div>
                 <div className="fixed left-2/3 mx-4" style={{width: "-webkit-fill-available"}}>
                     {videoDetails?.snippet?.liveBroadcastContent === "live" && <LiveChatContainer liveChatId={liveChatId}/>} 
