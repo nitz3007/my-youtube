@@ -16,7 +16,7 @@ const WatchVideoPage = () => {
     const getVideoDetails = async() => {
         const data = await fetch(YOUTUBE_VIDEO_DETAILS + searchParams.get("v"));
         const json= await data.json();
-        console.log(json.items[0], "vedio Details");
+        
         setVideoDetails(json.items[0]);
         setCommentCount(json?.items[0].statistics.commentCount);
         if(json?.items[0].snippet?.liveBroadcastContent === "live"){

@@ -13,7 +13,6 @@ const CommentContainer = ({commentCount, videoId}) => {
         const response = await fetch(COMMENT_THREAD_LIST + videoId);
         const data = await response.json();
         setCommentThreadList(data?.items)
-        console.log(data, "comment data");
     }
 
     return (

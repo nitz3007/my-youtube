@@ -20,8 +20,7 @@ const Comment = ({commentData, replyCount=0, commentId=null}) => {
 
     const getCommentReplies = async() => {
         const response = await fetch (COMMENT_REPLY_LIST + commentId);
-        const data = await response.json();
-        console.log(data, "replies"); 
+        const data = await response.json(); 
         setReplyList(data?.items);
     }
 

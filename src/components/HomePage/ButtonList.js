@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import LeftIcon from "../../assets/left-icon.svg";
 import RightIcon from "../../assets/right-icon.svg";
+import ButtonListShimmer from "./ButtonListShimmer";
 
 const ButtonList = () => {
     const selectedCategory = useSelector(store => store.app.selectedVideoCategory);
@@ -11,6 +12,7 @@ const ButtonList = () => {
     const [activeCategory, setActiveCategoryList] = useState(selectedCategory.name);
     const [activeLeftArrow, setActiveLeftArrow] = useState(false);
     const [activeRightArrow, setActiveRightArrow] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     
     const tabListRef = useRef(null);
     const leftArrowRef = useRef(null);
@@ -21,6 +23,7 @@ const ButtonList = () => {
         const data = await fetch(VIDEO_CATEGORY_LIST);
         const json = await data.json();
         setCategoryList(json.items);
+        setIsLoading(false);
     }
 
     useEffect(()=>{
@@ -57,6 +60,10 @@ const ButtonList = () => {
             manageLeftRightBtns();
         }
     };
+
+    if(isLoading) {
+        return <ButtonListShimmer/>
+    }
 
     return <div className="max-w-[80vw] overflow-hidden relative flex items-center p-2">
         <button ref={leftArrowRef} className={`${activeLeftArrow ? 'flex items-center' : 'hidden'} absolute w-20 top-0 h-full left-0 bg-gradient-to-r from-[#fff] from-60% to-transparent`} onClick={handleScrollLeft}>
