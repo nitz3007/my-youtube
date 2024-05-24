@@ -22,17 +22,20 @@ const Header = () => {
     
     useEffect(()=>{
         //Debouncing
-        const timer = setTimeout(()=> {
-            if(searchCache[searchQuery]) {
-                setSearchSuggestions(searchCache[searchQuery]);
-            } else {
-                getSearchSuggestions();
-            }   
-        }, 200);
-        
-        return ()=>{
-            clearTimeout(timer);
+        if(searchQuery) {
+            const timer = setTimeout(()=> {
+                if(searchCache[searchQuery]) {
+                    setSearchSuggestions(searchCache[searchQuery]);
+                } else {
+                    getSearchSuggestions();
+                }   
+            }, 200);
+            
+            return ()=>{
+                clearTimeout(timer);
+            }
         }
+        
     },[searchQuery]);
 
     const getSearchSuggestions = async() => {

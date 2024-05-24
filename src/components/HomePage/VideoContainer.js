@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { YOUTUBE_VIDEO_LIST_API, YOUTUBE_CATEGORYWISE_VIDEO_LIST_API } from '../../utils/constants';
 import VideoCard from '../Global/VideoCard';
 import VideoCardShimmer from '../Global/VideoCardShimmer';
@@ -12,23 +12,10 @@ const VideoContainer = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [nextPageToken, setNextPageToken] = useState(""); 
     const [totalResults, setTotalResults] = useState(0);
-    
-    useEffect(()=>{
-        const getVideos = async () => {
-            setIsLoading(true);
-            const data = await fetch(selectedCategory.id === 'all' ? YOUTUBE_VIDEO_LIST_API : YOUTUBE_CATEGORYWISE_VIDEO_LIST_API+selectedCategory.id);
-            const json = await data.json();
-            setVideos(json.items);
-            setIsLoading(false);
-            setNextPageToken(json.nextPageToken);
-            setTotalResults(json.pageInfo.totalResults);
-        }
-
-        getVideos();
-    },[selectedCategory]);
+    const loaderRef = useRef(null);
 
     const fetchVideoData = useCallback(async()=> {
-        if(totalResults > videos.length) {
+        if(totalResults > videos.length && nextPageToken) {
             if(isLoading) return;
             setIsLoading(true);
             const data = await fetch(selectedCategory.id === 'all' ? YOUTUBE_VIDEO_LIST_API + `&pageToken=${nextPageToken}`  : YOUTUBE_CATEGORYWISE_VIDEO_LIST_API+selectedCategory.id + `&pageToken=${nextPageToken}`);
@@ -36,41 +23,58 @@ const VideoContainer = () => {
             setVideos(prevItems => ([...prevItems, ...json.items]));
             setNextPageToken(json.nextPageToken)
             setIsLoading(false);
-            console.log(videos,"video items");
         }
-    },[nextPageToken, isLoading]);
+    },[isLoading, nextPageToken]);
 
     useEffect(()=>{
-        const handleScroll = () => {
-            const {scrollTop, clientHeight, scrollHeight} = document.documentElement;
-            if(scrollTop + clientHeight >= scrollHeight - 20) {
+        const observer = new IntersectionObserver((entries) => {
+            const target = entries[0];
+            if (target.isIntersecting) {
                 fetchVideoData();
             }
+        });
+      
+        if (loaderRef.current) {
+            observer.observe(loaderRef.current);
         }
-
-        window.addEventListener("scroll", handleScroll);
-
+      
         return () => {
-            window.removeEventListener("scroll", handleScroll);
-        }
-    },[fetchVideoData])
-
-    if(isLoading) {
-        return  <div className='flex flex-wrap justify-center'>
-            {[...Array(10)].map((e,i)=>{
-                return <VideoCardShimmer key={i}/>
-            })}
-        </div>
-    }
-    return (
-        <div className='flex flex-wrap justify-center'>
-            {videos?.length > 0 && 
-                videos.map((video) => (
-                    <Link key={video.id} to={"/watch?v="+video.id}>
-                        <VideoCard info={video}/>
-                    </Link>
-                ))
+            if (loaderRef.current) {
+              observer.unobserve(loaderRef.current);
             }
+        };
+    },[fetchVideoData]);
+
+    useEffect(()=>{
+        const getVideos = async () => {
+            setIsLoading(true);
+            const data = await fetch(selectedCategory.id === 'all' ? YOUTUBE_VIDEO_LIST_API : YOUTUBE_CATEGORYWISE_VIDEO_LIST_API+selectedCategory.id);
+            const json = await data.json();
+            setVideos(json.items);
+            setNextPageToken(json.nextPageToken);
+            setTotalResults(json.pageInfo.totalResults);
+            setIsLoading(false);
+        }
+
+        getVideos();
+    },[]);
+    
+    return (
+        <div>  
+            <div className='flex flex-wrap justify-center'>
+                {isLoading ?
+                    [...Array(12)].map((e,i)=>{
+                        return <VideoCardShimmer key={i}/>
+                    }) :
+                    videos?.length > 0 && 
+                    videos.map((video) => (
+                        <Link key={video.id} to={"/watch?v="+video.id}>
+                            <VideoCard info={video}/>
+                        </Link>
+                    ))
+                }
+             </div>
+             <div  ref={loaderRef}>{isLoading && <div>Loading...</div>}</div>
         </div>
     );
 }
