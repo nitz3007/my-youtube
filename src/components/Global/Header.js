@@ -5,7 +5,7 @@ import MenuIcon from '../../assets/menu-icon.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../../utils/appSlice';
 import React, { useState, useEffect } from 'react';
-import { SEARCH_SUGGESTION_API, SEARCH_LIST_API } from '../../utils/constants';
+import { SEARCH_SUGGESTION_API } from '../../utils/constants';
 import { cacheResults } from '../../utils/searchSlice';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -39,7 +39,7 @@ const Header = () => {
     },[searchQuery]);
 
     const getSearchSuggestions = async() => {
-        const data = await fetch(SEARCH_SUGGESTION_API + searchQuery);
+        const data = await fetch(SEARCH_SUGGESTION_API + `?query=${searchQuery}`);
         const json = await data.json();
         setSearchSuggestions(json[1]);
 

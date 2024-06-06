@@ -8,7 +8,7 @@ const SearchPage = () => {
     const [searchResult, setSearchResult] = useState([]);
 
     const getSearchResults = async() => {
-        const data = await fetch(SEARCH_LIST_API + searchParam.get('search_query'));
+        const data = await fetch(SEARCH_LIST_API + `?query=${searchParam.get('search_query')}`);
         const json = await data.json();
         setSearchResult(json.items);
     }
