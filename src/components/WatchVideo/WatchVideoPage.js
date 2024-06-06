@@ -14,7 +14,7 @@ const WatchVideoPage = () => {
     const [commentCount, setCommentCount] = useState("");
 
     const getVideoDetails = async() => {
-        const data = await fetch(YOUTUBE_VIDEO_DETAILS + searchParams.get("v"));
+        const data = await fetch(YOUTUBE_VIDEO_DETAILS + `?videoId=${searchParams.get("v")}`);
         const json= await data.json();
         
         setVideoDetails(json.items[0]);

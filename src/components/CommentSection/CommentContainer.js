@@ -14,7 +14,7 @@ const CommentContainer = ({commentCount, videoId}) => {
     useEffect(()=>{
         const getCommentThread = async() => {
             setIsLoading(true);
-            const response = await fetch(COMMENT_THREAD_LIST + videoId);
+            const response = await fetch(COMMENT_THREAD_LIST + `?videoId=${videoId}`);
             const data = await response.json();
             setCommentThreadList(data?.items);
             setNextPageToken(data?.nextPageToken);

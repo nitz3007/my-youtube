@@ -18,7 +18,7 @@ const VideoContainer = () => {
         if(totalResults > videos.length && nextPageToken) {
             if(isLoading) return;
             setIsLoading(true);
-            const data = await fetch(selectedCategory.id === 'all' ? YOUTUBE_VIDEO_LIST_API + `&pageToken=${nextPageToken}`  : YOUTUBE_CATEGORYWISE_VIDEO_LIST_API+selectedCategory.id + `&pageToken=${nextPageToken}`);
+            const data = await fetch(selectedCategory.id === 'all' ? YOUTUBE_VIDEO_LIST_API+`?pageToken=${nextPageToken}` : YOUTUBE_CATEGORYWISE_VIDEO_LIST_API + `?videoCategoryId=${selectedCategory.id}&pageToken=${nextPageToken}`);
             const json = await data.json();
             setVideos(prevItems => ([...prevItems, ...json.items]));
             setNextPageToken(json.nextPageToken)
@@ -48,7 +48,7 @@ const VideoContainer = () => {
     useEffect(()=>{
         const getVideos = async () => {
             setIsLoading(true);
-            const data = await fetch(selectedCategory.id === 'all' ? YOUTUBE_VIDEO_LIST_API : YOUTUBE_CATEGORYWISE_VIDEO_LIST_API+selectedCategory.id);
+            const data = await fetch(selectedCategory.id === 'all' ? YOUTUBE_VIDEO_LIST_API : YOUTUBE_CATEGORYWISE_VIDEO_LIST_API +`?videoCategoryId=${selectedCategory.id}`);
             const json = await data.json();
             setVideos(json.items);
             setNextPageToken(json.nextPageToken);
@@ -57,7 +57,7 @@ const VideoContainer = () => {
         }
 
         getVideos();
-    },[]);
+    },[selectedCategory]);
     
     return (
         <div>  

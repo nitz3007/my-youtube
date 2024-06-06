@@ -5,7 +5,7 @@ const VideoFooter = ({title, channelId}) => {
     const [channelDetails, setChannelDetails] = useState();
 
     const getChannelDetails = async() => {
-        const data = await fetch(CHANNEL_DETAILS + channelId);
+        const data = await fetch(CHANNEL_DETAILS + `?channelId=${channelId}`);
         const json = await data.json();
        
         console.log(json, "channelDetail");
