@@ -7,13 +7,13 @@ const Button = ({id, name, activeCategory, setActiveCategoryList}) => {
     const dispatch = useDispatch();
 
     const handleButtonClick= (e) => {
-        console.log(e.target.textContent);
+        
         setActiveCategoryList(e.target.textContent);
         dispatch(setSelectedVideoCategory({name: name, id: id}));
     }
 
     return <button 
-        className={`px-4 py-1 bg-[#eeeeee] rounded-md text-sm hover:bg-[#dddddd] font-semibold whitespace-nowrap ${activeCategory===name && 'bg-[#0f0f0f] text-[#fff]'} `}
+        className={`px-4 py-1 rounded-md text-sm hover:bg-[#dddddd] font-semibold whitespace-nowrap ${activeCategory===name ? 'text-[#fff] bg-[#0f0f0f]' : 'bg-[#eeeeee]'} `}
         onClick={e=> handleButtonClick(e)}
         >
         {name}

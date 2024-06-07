@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import ChatMessage from "./ChatMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../../utils/chatSlice";
-import { YOUTUBE_LIVE_CHAT_LIST, YOUTUBE_SEND_LIVE_CHAT } from "../../utils/constants"
+import { YOUTUBE_LIVE_CHAT_LIST } from "../../utils/constants"
 import SendIcon from "../../assets/send-icon.svg";
 
 const LiveChatContainer = ({liveChatId}) => {
@@ -15,10 +15,9 @@ const LiveChatContainer = ({liveChatId}) => {
     useEffect(()=>{
         const i = setInterval(()=>{
             //API Polling
-            console.log("API Polling");
             if(liveChatId) {
                 //commented to avoid yt quota exhaustion
-                // getLiveChatData(liveChatId);
+                getLiveChatData(liveChatId);
             }
             
         }, 5000);
@@ -28,7 +27,7 @@ const LiveChatContainer = ({liveChatId}) => {
     
 
     const getLiveChatData = async(chatId) => {
-        const chatData = await fetch(YOUTUBE_LIVE_CHAT_LIST + chatId);
+        const chatData = await fetch(YOUTUBE_LIVE_CHAT_LIST + `?liveChatId=${chatId}`);
         const chatjson = await chatData.json();
         const chatObj = chatjson?.items.map(chatItem => ({
             name: chatItem?.authorDetails.displayName,

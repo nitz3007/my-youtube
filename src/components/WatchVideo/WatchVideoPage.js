@@ -12,6 +12,7 @@ const WatchVideoPage = () => {
     const [videoDetails, setVideoDetails] = useState(null);
     const [liveChatId, setLiveChatId] = useState();
     const [commentCount, setCommentCount] = useState("");
+    const [isLive, setIsLive] = useState(null);
 
     const getVideoDetails = async() => {
         const data = await fetch(YOUTUBE_VIDEO_DETAILS + `?videoId=${searchParams.get("v")}`);
@@ -20,6 +21,7 @@ const WatchVideoPage = () => {
         setVideoDetails(json.items[0]);
         setCommentCount(json?.items[0].statistics.commentCount);
         if(json?.items[0].snippet?.liveBroadcastContent === "live"){
+            setIsLive(true);
             setLiveChatId(json?.items[0].liveStreamingDetails?.activeLiveChatId);
         }
         
@@ -47,10 +49,10 @@ const WatchVideoPage = () => {
                     </iframe>
                     {videoDetails && <VideoFooter title={videoDetails?.snippet?.title} channelId={videoDetails?.snippet?.channelId}/>} 
                     {videoDetails && <VideoDetails videoDetails={videoDetails}/>}
-                    <CommentContainer commentCount={commentCount} videoId={searchParams.get("v")}/>   
+                    {!isLive && <CommentContainer commentCount={commentCount} videoId={searchParams.get("v")}/>}  
                 </div>
                 <div className="fixed left-2/3 mx-4" style={{width: "-webkit-fill-available"}}>
-                    {videoDetails?.snippet?.liveBroadcastContent === "live" && <LiveChatContainer liveChatId={liveChatId}/>} 
+                    {isLive && <LiveChatContainer liveChatId={liveChatId}/>} 
                 </div>
             </div>
             {/* <div className="grid grid-cols-3 gap-4">

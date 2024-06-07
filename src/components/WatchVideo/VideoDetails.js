@@ -26,7 +26,7 @@ const VideoDetails = ({videoDetails}) => {
     }
     
     return (                  
-        <div className="bg-[#eeeeee] rounded-lg p-3 mt-4 ">
+        <div className="bg-[#eeeeee] rounded-lg p-3 my-4">
             <span className="inline text-sm text-[#0f0f0f] font-semibold">
                 <text className="mr-2">{`${Number(videoDetails?.statistics?.viewCount/1000).toFixed(0)}K views`}</text>
                 <text>{time_ago(videoDetails?.snippet?.publishedAt)}</text>

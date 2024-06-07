@@ -2,13 +2,8 @@ require("dotenv").config();
 
 const axios = require("axios");
 exports.handler = async (event, context) => {
+      let apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&type=video&key=${process.env.REACT_APP_GOOGLE_API_KEY}&eventType=live`
     try {
-      const { videoCategoryId, pageToken } = event.queryStringParameters;
-      let apiUrl = `https://www.googleapis.com/youtube/v3/videos?key=${process.env.REACT_APP_GOOGLE_API_KEY}&part=snippet,contentDetails,statistics&chart=mostPopular&regionCode=IN&maxResults=24&videoCategoryId=${videoCategoryId}`
-      if(pageToken) {
-        apiUrl += `&pageToken=${pageToken}`
-      }
-    
       let response = await axios.get(
         apiUrl,
         {
@@ -16,11 +11,12 @@ exports.handler = async (event, context) => {
           params: { trophies: true },
         }
       );
-      let nextPageVideoList = response.data;
+  
+      let liveVideos = response.data;
   
       return {
         statusCode: 200,
-        body: JSON.stringify({ ...nextPageVideoList}),
+        body: JSON.stringify({ ...liveVideos }),
       };
     } catch (error) {
       return {

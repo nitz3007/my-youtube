@@ -12,17 +12,19 @@ const CommentContainer = ({commentCount, videoId}) => {
 
 
     useEffect(()=>{
-        const getCommentThread = async() => {
-            setIsLoading(true);
-            const response = await fetch(COMMENT_THREAD_LIST + `?videoId=${videoId}`);
-            const data = await response.json();
-            setCommentThreadList(data?.items);
-            setNextPageToken(data?.nextPageToken);
-            setIsLoading(false);
+        if(commentCount > 0) {
+            const getCommentThread = async() => {
+                setIsLoading(true);
+                const response = await fetch(COMMENT_THREAD_LIST + `?videoId=${videoId}`);
+                const data = await response.json();
+                setCommentThreadList(data?.items);
+                setNextPageToken(data?.nextPageToken);
+                setIsLoading(false);
+            }
+            getCommentThread();
         }
-
-        getCommentThread();
-    },[]);
+       
+    },[commentCount]);
 
     const fetchCommentThread = useCallback(async()=> {
         if(isLoading) return;
@@ -43,7 +45,6 @@ const CommentContainer = ({commentCount, videoId}) => {
 
     useEffect(()=>{
         const observer = new IntersectionObserver((entries)=>{
-            console.log(entries, "entries")
             const target = entries[0];
             if(target.isIntersecting) {
                 fetchCommentThread();
