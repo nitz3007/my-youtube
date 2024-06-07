@@ -13,6 +13,18 @@ const LiveChatContainer = ({liveChatId}) => {
     
 
     useEffect(()=>{
+
+        const getLiveChatData = async(chatId) => {
+            const chatData = await fetch(YOUTUBE_LIVE_CHAT_LIST + `?liveChatId=${chatId}`);
+            const chatjson = await chatData.json();
+            const chatObj = chatjson?.items.map(chatItem => ({
+                name: chatItem?.authorDetails.displayName,
+                message: chatItem?.snippet.displayMessage
+                
+            }))
+            dispatch(addMessage(chatObj));
+        }
+        
         const i = setInterval(()=>{
             //API Polling
             if(liveChatId) {
@@ -23,19 +35,10 @@ const LiveChatContainer = ({liveChatId}) => {
         }, 5000);
 
         return ()=> clearInterval(i);
-    },[liveChatId]);
+    },[liveChatId, dispatch]);
     
 
-    const getLiveChatData = async(chatId) => {
-        const chatData = await fetch(YOUTUBE_LIVE_CHAT_LIST + `?liveChatId=${chatId}`);
-        const chatjson = await chatData.json();
-        const chatObj = chatjson?.items.map(chatItem => ({
-            name: chatItem?.authorDetails.displayName,
-            message: chatItem?.snippet.displayMessage
-            
-        }))
-        dispatch(addMessage(chatObj));
-      }
+    
 
     // const handleSendChat = () => {
     //     console.log(reply);

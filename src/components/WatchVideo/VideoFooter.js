@@ -4,16 +4,16 @@ import {CHANNEL_DETAILS} from "../../utils/constants";
 const VideoFooter = ({title, channelId}) => {
     const [channelDetails, setChannelDetails] = useState();
 
-    const getChannelDetails = async() => {
-        const data = await fetch(CHANNEL_DETAILS + `?channelId=${channelId}`);
-        const json = await data.json();
-
-        setChannelDetails(json.items[0]);
-    }
-
     useEffect(()=>{
+        const getChannelDetails = async() => {
+            const data = await fetch(CHANNEL_DETAILS + `?channelId=${channelId}`);
+            const json = await data.json();
+    
+            setChannelDetails(json.items[0]);
+        }
+
         getChannelDetails();
-    },[]);
+    },[channelId]);
 
     return (
         <div className="my-4">

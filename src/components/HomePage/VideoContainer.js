@@ -24,7 +24,7 @@ const VideoContainer = () => {
             setNextPageToken(json.nextPageToken)
             setIsLoading(false);
         }
-    },[isLoading, nextPageToken]);
+    },[isLoading, nextPageToken, selectedCategory, totalResults, videos]);
 
     useEffect(()=>{
         const observer = new IntersectionObserver((entries) => {
@@ -34,13 +34,14 @@ const VideoContainer = () => {
             }
         });
       
-        if (loaderRef.current) {
-            observer.observe(loaderRef.current);
+        let loadRefCurrent = loaderRef.current;
+        if (loadRefCurrent) {
+            observer.observe(loadRefCurrent);
         }
       
         return () => {
-            if (loaderRef.current) {
-              observer.unobserve(loaderRef.current);
+            if (loadRefCurrent) {
+              observer.unobserve(loadRefCurrent);
             }
         };
     },[fetchVideoData]);

@@ -23,6 +23,17 @@ const Header = () => {
     useEffect(()=>{
         //Debouncing
         if(searchQuery) {
+            const getSearchSuggestions = async() => {
+                const data = await fetch(SEARCH_SUGGESTION_API + `?query=${searchQuery}`);
+                const json = await data.json();
+                setSearchSuggestions(json[1]);
+        
+                //update cache
+                dispatch(cacheResults({
+                    [searchQuery]: json[1]
+                }))
+            }
+
             const timer = setTimeout(()=> {
                 if(searchCache[searchQuery]) {
                     setSearchSuggestions(searchCache[searchQuery]);
@@ -36,18 +47,7 @@ const Header = () => {
             }
         }
         
-    },[searchQuery]);
-
-    const getSearchSuggestions = async() => {
-        const data = await fetch(SEARCH_SUGGESTION_API + `?query=${searchQuery}`);
-        const json = await data.json();
-        setSearchSuggestions(json[1]);
-
-        //update cache
-        dispatch(cacheResults({
-            [searchQuery]: json[1]
-        }))
-    }
+    },[searchQuery, dispatch, searchCache]);
     
     const toggleMenuHandler = () => {
         dispatch(toggleMenu());

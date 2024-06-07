@@ -24,13 +24,13 @@ const CommentContainer = ({commentCount, videoId}) => {
             getCommentThread();
         }
        
-    },[commentCount]);
+    },[commentCount, videoId]);
 
     const fetchCommentThread = useCallback(async()=> {
         if(isLoading) return;
         if(nextPageToken) {
             setIsLoading(true);
-            const data = await fetch(COMMENT_THREAD_LIST + videoId + "&pageToken=" + nextPageToken);
+            const data = await fetch(COMMENT_THREAD_LIST + `?videoId=${videoId}&pageToken=${nextPageToken}`);
             const json = await data.json();
             setCommentThreadList((prevComments) => [...prevComments, ...json?.items]);
             setIsLoading(false);
@@ -41,7 +41,7 @@ const CommentContainer = ({commentCount, videoId}) => {
             }
         }
         
-    },[isLoading, nextPageToken]);
+    },[isLoading, nextPageToken, videoId]);
 
     useEffect(()=>{
         const observer = new IntersectionObserver((entries)=>{
@@ -51,13 +51,14 @@ const CommentContainer = ({commentCount, videoId}) => {
             }
         });
 
-        if(loadRef.current) {
-            observer.observe(loadRef.current);
+        let loadRefCurrent = loadRef.current;
+        if(loadRefCurrent) {
+            observer.observe(loadRefCurrent);
         } 
 
         return () => {
-            if(loadRef.current) {
-                observer.unobserve(loadRef.current);
+            if(loadRefCurrent) {
+                observer.unobserve(loadRefCurrent);
             } 
         }
 

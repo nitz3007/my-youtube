@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import UserIcon from "../../assets/profile-img.jpg";
 import LikeIcon from "../../assets/thumbsup-icon.svg";
 import DownIcon from "../../assets/chevron-down.svg";
 import CommentList from "./CommentList";
@@ -18,17 +17,16 @@ const Comment = ({commentData, replyCount=0, commentId=null}) => {
         // }
     }
 
-    const getCommentReplies = async() => {
-        const response = await fetch (COMMENT_REPLY_LIST + `?parentId=${commentId}`);
-        const data = await response.json(); 
-        setReplyList(data?.items);
-    }
-
     useEffect(()=>{
         if(isReplyListExpanded) {
+            const getCommentReplies = async() => {
+                const response = await fetch (COMMENT_REPLY_LIST + `?parentId=${commentId}`);
+                const data = await response.json(); 
+                setReplyList(data?.items);
+            }
             getCommentReplies();
         }
-    },[isReplyListExpanded])
+    },[isReplyListExpanded, commentId])
 
   return (
 
@@ -45,7 +43,7 @@ const Comment = ({commentData, replyCount=0, commentId=null}) => {
             <div>
                 {replyCount> 0 &&
                     <div className="flex items-center">
-                        <img src={DownIcon} className="h-3 mr-2"/>
+                        <img src={DownIcon} alt="down" className="h-3 mr-2"/>
                         <button className="text-[#065fd4] text-sm font-semibold" onClick={handleToggleReplyList}>
                             {`${replyCount} ${replyCount === 1 ? 'reply' : 'replies'}`}
                         </button>

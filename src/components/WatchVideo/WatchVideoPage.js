@@ -14,23 +14,25 @@ const WatchVideoPage = () => {
     const [commentCount, setCommentCount] = useState("");
     const [isLive, setIsLive] = useState(null);
 
-    const getVideoDetails = async() => {
-        const data = await fetch(YOUTUBE_VIDEO_DETAILS + `?videoId=${searchParams.get("v")}`);
-        const json= await data.json();
-        
-        setVideoDetails(json.items[0]);
-        setCommentCount(json?.items[0].statistics.commentCount);
-        if(json?.items[0].snippet?.liveBroadcastContent === "live"){
-            setIsLive(true);
-            setLiveChatId(json?.items[0].liveStreamingDetails?.activeLiveChatId);
-        }
-        
-    }
+    const videoId = searchParams.get("v");
 
     useEffect(()=>{
+        const getVideoDetails = async() => {
+            const data = await fetch(YOUTUBE_VIDEO_DETAILS + `?videoId=${videoId}`);
+            const json= await data.json();
+            
+            setVideoDetails(json.items[0]);
+            setCommentCount(json?.items[0].statistics.commentCount);
+            if(json?.items[0].snippet?.liveBroadcastContent === "live"){
+                setIsLive(true);
+                setLiveChatId(json?.items[0].liveStreamingDetails?.activeLiveChatId);
+            }
+            
+        }
+
         getVideoDetails();
 
-    },[searchParams.get("v")])
+    },[videoId])
 
 
     return (

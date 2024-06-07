@@ -13,7 +13,7 @@ const LivePage = (props) => {
   useEffect(()=>{
     dispatch(closeMenu());
     getLiveBroadcastList();
-  },[]);
+  },[dispatch]);
 
   const getLiveBroadcastList = async() => {
     const data = await fetch(LIVE_SEARCH_LIST_API);

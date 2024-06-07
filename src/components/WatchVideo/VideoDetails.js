@@ -9,7 +9,7 @@ const VideoDetails = ({videoDetails}) => {
 
     useEffect(()=> {
         const input = videoDetails?.snippet?.description;
-        const urlRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g;
+        const urlRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*))/g;
         const matches = input.match(urlRegex);
         let output = input;
         if(matches && matches.length> 0) {

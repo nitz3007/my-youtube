@@ -4,16 +4,16 @@ import { SEARCH_LIST_API } from '../../utils/constants';
 import SearchVideoCard from './SearchVideoCard';
 
 const SearchPage = () => {
-    const [searchParam, setSearchParam] = useSearchParams();
+    // eslint-disable-next-line
+    const [searchParam] = useSearchParams();
     const [searchResult, setSearchResult] = useState([]);
 
-    const getSearchResults = async() => {
-        const data = await fetch(SEARCH_LIST_API + `?query=${searchParam.get('search_query')}`);
-        const json = await data.json();
-        setSearchResult(json.items);
-    }
-
     useEffect(()=>{
+        const getSearchResults = async() => {
+            const data = await fetch(SEARCH_LIST_API + `?query=${searchParam.get('search_query')}`);
+            const json = await data.json();
+            setSearchResult(json.items);
+        }
         getSearchResults();
     },[searchParam]);
 

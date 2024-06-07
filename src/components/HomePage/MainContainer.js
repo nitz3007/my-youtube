@@ -10,7 +10,7 @@ const MainContainer = () => {
 
     useEffect(()=>{
         dispatch(closeMenu());
-    },[]);
+    },[dispatch]);
     // const isMenuOpen = useSelector(store => store.app.isMenuOpen);
     return (
         <div className='flex flex-col mx-auto items-center'>
